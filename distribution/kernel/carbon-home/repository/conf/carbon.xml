@@ -373,6 +373,23 @@
         </KeyStore>
 
         <!--
+            KeyStore which will be used for encrypting/decrypting passwords
+            and other sensitive information.
+        -->
+        <InternalKeyStore>
+            <!-- Keystore file location-->
+            <Location>${carbon.home}/repository/resources/security/wso2carbon.jks</Location>
+            <!-- Keystore type (JKS/PKCS12 etc.)-->
+            <Type>JKS</Type>
+            <!-- Keystore password-->
+            <Password>wso2carbon</Password>
+            <!-- Private Key alias-->
+            <KeyAlias>wso2carbon</KeyAlias>
+            <!-- Private Key password-->
+            <KeyPassword>wso2carbon</KeyPassword>
+        </InternalKeyStore>
+
+        <!--
             System wide trust-store which is used to maintain the certificates of all
             the trusted parties.
         -->
@@ -443,6 +460,13 @@
             </Patterns>
         </XSSPreventionConfig>
     </Security>
+
+    <CryptoService>
+
+        <Enabled>true</Enabled>
+
+    </CryptoService>
+
 
     <!--
        The temporary work directory

@@ -33,6 +33,7 @@ import org.wso2.carbon.user.core.service.RealmService;
 import org.wso2.carbon.core.clustering.api.CoordinatedActivity;
 import org.wso2.carbon.core.encryption.SymmetricEncryption;
 import org.wso2.carbon.utils.multitenancy.MultitenantConstants;
+import org.wso2.carbon.crypto.api.CryptoService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,8 @@ import java.util.List;
  * cardinality="0..n" policy="dynamic"  bind="addServerStartupObserver" unbind="removeServerStartupObserver"
  * @scr.reference name="carbonCoreInitializedEventService" interface="org.wso2.carbon.context.CarbonCoreInitializedEvent"
  * cardinality="1..1" policy="dynamic"  bind="setCarbonCoreInitializedEventService" unbind="unsetCarbonCoreInitializedEventService"
+ * @scr.reference name="carbonCryptoService" interface="org.wso2.carbon.crypto.api.CryptoService"
+ * cardinality="0..1" policy="dynamic"  bind="setCarbonCryptoService" unbind="unsetCarbonCryptoService"
   */
 public class CarbonCoreServiceComponent {
 
@@ -251,4 +254,14 @@ public class CarbonCoreServiceComponent {
     protected void unsetCarbonCoreInitializedEventService(CarbonCoreInitializedEvent carbonCoreInitializedEvent){}
 
     protected void setCarbonCoreInitializedEventService(CarbonCoreInitializedEvent carbonCoreInitializedEventService){}
+
+    protected void setCarbonCryptoService(CryptoService cryptoService){
+
+        CarbonCoreDataHolder.getInstance().setCryptoService(cryptoService);
+    }
+
+    protected void unsetCarbonCryptoService(CryptoService cryptoService){
+
+        CarbonCoreDataHolder.getInstance().setCryptoService(null);
+    }
 }
